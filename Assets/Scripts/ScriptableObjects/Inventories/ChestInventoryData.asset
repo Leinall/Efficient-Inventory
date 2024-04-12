@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5421a6dd42a6748a995d0e517b89f0, type: 3}
+  m_Name: ChestInventoryData
+  m_EditorClassIdentifier: 
+  inventoryItems:
+  - inventoryItem: {fileID: 11400000, guid: 57f901eb69b42b641b74cab4a3e74ac8, type: 2}
+    itemCount: 1
+  - inventoryItem: {fileID: 11400000, guid: 34552cfb8a005cf4886c53f19f9bfbf5, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: 7a2dcf2438900a440bd1945160ade952, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: 6f4d43e3a18deed49931bf872220e676, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: 342a699191097b24bb4810faaef50e62, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: 06b775314aa0c8e44aa45616e936685e, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: f0490a832f9a3fc4fbda3ba18aaaea7b, type: 2}
+    itemCount: 0
+  - inventoryItem: {fileID: 11400000, guid: a182e5c6682d03c4682a36dd71de21ec, type: 2}
+    itemCount: 0
