@@ -15,13 +15,14 @@ public class BagItemComposite : Component
             booksIheBag.Add(GameManager.Instance.book.GetComponent<Component>());
         }
     }
+
+    // The bag implements its own reveal items which is adding the number of books it created in the start randomly
     public override void RevealItems()
     {
         foreach (var item in booksIheBag)
         {
             mainInv.AddItemToInventory(mainInv.SearchForAnItem("Book"));
         }
-        mainInv.RefreshPanel();
     }
 
     public void Add(Component component)
