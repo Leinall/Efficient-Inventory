@@ -21,6 +21,8 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
     private int numberOfClicks = 0;
     private int NoOfItemsCreated = 0;
 
+    private Stack<InventoryItem> itemsToBeRemoved = new Stack<InventoryItem>();
+
     // for multiclicking
     private int[] multiClickArray = new int[4] { -1, -1, -1, -1 };
     private int multiClickCounter = 0;
@@ -41,7 +43,15 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
         //AddItemToInventory(SearchForAnItem("Apple"), 3);
         //RemoveItemFromInventory(SearchForAnItem("Bag"));
 
-        //Invoke("RefreshPanel", 0.5f);
+        //For testing
+        itemsToBeRemoved.Push(SearchForAnItem("Axe"));
+        itemsToBeRemoved.Push(SearchForAnItem("Apple"));
+        itemsToBeRemoved.Push(SearchForAnItem("Book"));
+        itemsToBeRemoved.Push(SearchForAnItem("Coins"));
+
+        RemoveStackedItems(itemsToBeRemoved);
+
+        Invoke("RefreshPanel", 0.5f);
         //Invoke("test", 5f);
         //Invoke("RefreshPanel", 6f);
     }
@@ -50,6 +60,16 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
     {
         //print("test");
         AddItemToInventory(SearchForAnItem("Bag"), 3);
+    }
+
+    public void RemoveStackedItems(Stack<InventoryItem> itemsToBeRemoved)
+    {
+        // All are removed
+        while (itemsToBeRemoved.Count > 0)
+        {
+            var item = itemsToBeRemoved.Pop();
+            RemoveItemFromInventory(item);
+        }
     }
 
     public void RemovingAllChildrenInPanel()
@@ -183,6 +203,7 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
         }
     }
 
+    // removes items totally from the inventory
     public void RemoveItemFromInventory(InventoryItem item)
     {
         if (item == null) return;
@@ -206,7 +227,26 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
 
     public void Transfer()
     {
-        MovetoOtherInventory(currentClickedBtn.GetComponent<ItemInfo>().item);
+        if (multiClickArray[0] != -1)
+        {
+            for (int i = 0; i < multiClickArray.Length; i++)
+            {
+                // to prevent producing an error if the user choose less than 4 items
+                if (multiClickArray[i] != -1)
+                {
+                    if (InventoryBtns[multiClickArray[i]] == null) print("nulll");
+                    MovetoOtherInventory(InventoryBtns[multiClickArray[i]].GetComponent<ItemInfo>().item);
+
+                }
+            }
+            ResetMultiClickArray();
+        }
+        else
+        {
+            MovetoOtherInventory(currentClickedBtn.GetComponent<ItemInfo>().item);
+        }
+
+        Invoke("RefereshAllPanels", 0.25f);
     }
 
     // accessed by the transfer button
@@ -214,8 +254,6 @@ public class InventoryHandler : MonoBehaviour // each kind of inventory shall ha
     {
         otherInventory.AddItemToInventory(item);
         DecreementItemCount(item);
-
-        Invoke("RefereshAllPanels", 0.25f);
     }
 
     public void RefereshAllPanels()
